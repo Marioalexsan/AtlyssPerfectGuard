@@ -1,5 +1,4 @@
-﻿using HarmonyLib;
-using Mirror;
+﻿using Mirror;
 
 namespace Marioalexsan.PerfectGuard;
 
@@ -49,8 +48,8 @@ internal class AbuseDetector
     public TimeSpan SuspicionTimeBetweenEvents { get; }
     public TimeSpan ConfirmTimeBetweenEvents { get; }
 
-    public event EventHandler<Player>? OnSuspicionRaised;
-    public event EventHandler<Player>? OnConfirmRaised;
+    public event EventHandler<NetworkBehaviour>? OnSuspicionRaised;
+    public event EventHandler<NetworkBehaviour>? OnConfirmRaised;
 
     struct TrackedData
     {
@@ -59,21 +58,18 @@ internal class AbuseDetector
         public SuspicionLevel Suspicion;
     }
 
-    private readonly Dictionary<Player, TrackedData> PlayerData = [];
+    private readonly Dictionary<NetworkBehaviour, TrackedData> PlayerData = [];
 
-    public bool TrackIfServerAndCheckBehaviour(Player player) => NetworkServer.active ? TrackEventAndCheckBehaviour(player) : CheckBehaviour(player);
-    public bool TrackIfClientAndCheckBehaviour(Player player) => NetworkClient.active && !NetworkServer.active ? TrackEventAndCheckBehaviour(player) : CheckBehaviour(player);
+    public bool TrackIfServerAndCheckBehaviour(NetworkBehaviour player) => NetworkServer.active ? TrackEventAndCheckBehaviour(player) : CheckBehaviour(player);
+    public bool TrackIfClientAndCheckBehaviour(NetworkBehaviour player) => NetworkClient.active && !NetworkServer.active ? TrackEventAndCheckBehaviour(player) : CheckBehaviour(player);
 
     /// <summary>
     /// Returns true if the current player behaviour seems normal.
     /// </summary>
     /// <returns>True if current behaviour should be considered as normal, false otherwise</returns>
-    public bool CheckBehaviour(Player player)
+    public bool CheckBehaviour(NetworkBehaviour player)
     {
-        if (PlayerData.TryGetValue(player, out var playerData))
-            return playerData.Suspicion == SuspicionLevel.Normal;
-
-        return true;
+        return !PlayerData.TryGetValue(player, out var playerData) || playerData.Suspicion == SuspicionLevel.Normal;
     }
 
     /// <summary>
@@ -81,7 +77,7 @@ internal class AbuseDetector
     /// </summary>
     /// <param name="player">The player to track event for</param>
     /// <returns>True if current behaviour should be considered as normal, false otherwise</returns>
-    public bool TrackEventAndCheckBehaviour(Player player)
+    public bool TrackEventAndCheckBehaviour(NetworkBehaviour player)
     {
         var currentTime = DateTime.Now;
 
