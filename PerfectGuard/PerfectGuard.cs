@@ -30,8 +30,6 @@ public class PerfectGuard : BaseUnityPlugin
     private TimeSpan _abuseDetectorCleanupAccumulator;
     private TimeSpan _miscAccumulator;
 
-    private static bool _currentlyCleaningItems;
-
     public PerfectGuard()
     {
         Logger = base.Logger;
@@ -60,7 +58,7 @@ public class PerfectGuard : BaseUnityPlugin
             _windowShown = !_windowShown;
 
         // Run the spike check EVERY FRAME for instant reaction to prevent freezing.
-        if (EnablePerfectGuard.Value && EnableItemCleanup.Value && !_currentlyCleaningItems && NetworkClient.isConnected)
+        if (EnablePerfectGuard.Value && EnableItemCleanup.Value && NetworkClient.isConnected)
         {
             CheckForObjectSpikes();
         }

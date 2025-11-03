@@ -48,6 +48,8 @@ internal class AbuseDetector
     public TimeSpan SuspicionTimeBetweenEvents { get; }
     public TimeSpan ConfirmTimeBetweenEvents { get; }
 
+    public SuspicionLevel Suspicion { get; private set; } = SuspicionLevel.Normal;
+
     public event EventHandler<NetworkBehaviour>? OnSuspicionRaised;
     public event EventHandler<NetworkBehaviour>? OnConfirmRaised;
 
@@ -60,24 +62,12 @@ internal class AbuseDetector
 
     private readonly Dictionary<NetworkBehaviour, TrackedData> PlayerData = [];
 
-    public bool TrackIfServerAndCheckBehaviour(NetworkBehaviour player) => NetworkServer.active ? TrackEventAndCheckBehaviour(player) : CheckBehaviour(player);
-    public bool TrackIfClientAndCheckBehaviour(NetworkBehaviour player) => NetworkClient.active && !NetworkServer.active ? TrackEventAndCheckBehaviour(player) : CheckBehaviour(player);
-
-    /// <summary>
-    /// Returns true if the current player behaviour seems normal.
-    /// </summary>
-    /// <returns>True if current behaviour should be considered as normal, false otherwise</returns>
-    public bool CheckBehaviour(NetworkBehaviour player)
-    {
-        return !PlayerData.TryGetValue(player, out var playerData) || playerData.Suspicion == SuspicionLevel.Normal;
-    }
-
     /// <summary>
     /// Tracks event and returns true if the current player behaviour seems normal.
     /// </summary>
     /// <param name="player">The player to track event for</param>
     /// <returns>True if current behaviour should be considered as normal, false otherwise</returns>
-    public bool TrackEventAndCheckBehaviour(NetworkBehaviour player)
+    public void TrackEvent(NetworkBehaviour player)
     {
         var currentTime = DateTime.Now;
 
@@ -89,7 +79,7 @@ internal class AbuseDetector
                 TimeBetweenEventsEMA = SuspicionTimeBetweenEvents * 2,
                 Suspicion = SuspicionLevel.Normal
             };
-            return true;
+            return;
         }
 
         var timeSinceLastEvent = currentTime - playerData.TimeSinceLastEvent;
@@ -118,6 +108,6 @@ internal class AbuseDetector
 
         PlayerData[player] = playerData with { Suspicion = newSuspicionLevel };
 
-        return newSuspicionLevel == SuspicionLevel.Normal;
+        Suspicion = newSuspicionLevel;
     }
 }
