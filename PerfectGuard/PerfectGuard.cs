@@ -50,7 +50,7 @@ public class PerfectGuard : BaseUnityPlugin
         AudioRateLimiting = Config.Bind("Protections", nameof(AudioRateLimiting), true, "Enables audio rate limits to prevent spam.");
         ItemCleanup = Config.Bind("Protections", nameof(ItemCleanup), true, "Enable cleanup for excessive item drops.");
         
-        MaxItemsThreshold = Config.Bind("Tuning", nameof(MaxItemsThreshold), 150f, new ConfigDescription("The maximum number of items allowed before the items are forcefully cleaned up.", new AcceptableValueRange<float>(50, 500)));
+        MaxItemsThreshold = Config.Bind("Tuning", nameof(MaxItemsThreshold), 200f, new ConfigDescription("The maximum number of items allowed before the items are forcefully cleaned up.", new AcceptableValueRange<float>(50, 500)));
 
         UpdateEnableValues();
     }
