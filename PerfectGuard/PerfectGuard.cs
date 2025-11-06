@@ -67,7 +67,8 @@ public class PerfectGuard : BaseUnityPlugin
         if (_abuseDetectorCleanupAccumulator >= TimeSpan.FromSeconds(60))
         {
             _abuseDetectorCleanupAccumulator = TimeSpan.Zero;
-            AbuseDetector.RunActorCleanup();
+            AbuseDetectorEMA.RunActorCleanup();
+            AbuseDetectorTokenBucket.RunActorCleanup();
         }
 
         _miscAccumulator += TimeSpan.FromSeconds(Time.deltaTime);

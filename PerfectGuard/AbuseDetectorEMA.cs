@@ -9,9 +9,9 @@ public enum SuspicionLevel
     Confirmed
 }
 
-internal class AbuseDetector
+internal class AbuseDetectorEMA
 {
-    public static List<AbuseDetector> AllDetectors { get; } = [];
+    public static List<AbuseDetectorEMA> AllDetectors { get; } = [];
 
     public static void RunActorCleanup()
     {
@@ -27,9 +27,9 @@ internal class AbuseDetector
         }
     }
 
-    public AbuseDetector(double suspicionRate) : this(suspicionRate, suspicionRate * 4) { }
+    public AbuseDetectorEMA(double suspicionRate) : this(suspicionRate, suspicionRate * 4) { }
 
-    public AbuseDetector(double suspicionRate, double confirmRate)
+    public AbuseDetectorEMA(double suspicionRate, double confirmRate)
     {
         // Enforce that confirmRate >= suspicionRate
         SupicionRate = suspicionRate;
@@ -107,7 +107,6 @@ internal class AbuseDetector
         }
 
         PlayerData[player] = playerData with { Suspicion = newSuspicionLevel };
-
         Suspicion = newSuspicionLevel;
     }
 }

@@ -46,40 +46,40 @@ static class CmdRpcThrottle
         Throttle("System.Void Mirror.NetworkTransformUnreliable::RpcServerToClientSync(System.Nullable`1<UnityEngine.Vector3>,System.Nullable`1<UnityEngine.Quaternion>,System.Nullable`1<UnityEngine.Vector3>)", Unlimited);
 
         // BreakableObject
-        Throttle("System.Void BreakableObject::Rpc_Break(UnityEngine.Vector3)", LowLimit);
+        Throttle("System.Void BreakableObject::Rpc_Break(UnityEngine.Vector3)");
 
         // ChatBehaviour
-        Throttle("System.Void ChatBehaviour::Cmd_SetChatChannel(System.String)", LowLimit);
-        Throttle("System.Void ChatBehaviour::Cmd_JoinChatRoom(System.String)", LowLimit);
-        Throttle("System.Void ChatBehaviour::Cmd_ToggleChatBubble(System.Boolean)", LowLimit);
-        Throttle("System.Void ChatBehaviour::Cmd_SendChatMessage(System.String,ChatBehaviour/ChatChannel)", LowLimit); // Even this value is too generous
-        Throttle("System.Void ChatBehaviour::Rpc_RecieveChatMessage(System.String,System.Boolean,ChatBehaviour/ChatChannel)", HighLimit); // Includes all chat comms
-        Throttle("System.Void ChatBehaviour::Target_RecieveMessage(System.String)", LowLimit);
-        Throttle("System.Void ChatBehaviour::Target_GameLogicMessage(System.String)", HighLimit); // Item pickup / exp / etc. messages
-        Throttle("System.Void ChatBehaviour::Target_RecieveTriggerMessage(System.String)", LowLimit); // Status text in the center of the screen
+        Throttle("System.Void ChatBehaviour::Cmd_SetChatChannel(System.String)");
+        Throttle("System.Void ChatBehaviour::Cmd_JoinChatRoom(System.String)");
+        Throttle("System.Void ChatBehaviour::Cmd_ToggleChatBubble(System.Boolean)");
+        Throttle("System.Void ChatBehaviour::Cmd_SendChatMessage(System.String,ChatBehaviour/ChatChannel)");
+        Throttle("System.Void ChatBehaviour::Rpc_RecieveChatMessage(System.String,System.Boolean,ChatBehaviour/ChatChannel)");
+        Throttle("System.Void ChatBehaviour::Target_RecieveMessage(System.String)");
+        Throttle("System.Void ChatBehaviour::Target_GameLogicMessage(System.String)");
+        Throttle("System.Void ChatBehaviour::Target_RecieveTriggerMessage(System.String)");
 
         // Creep
-        Throttle("System.Void Creep::Rpc_PlayCreepJumpEffect()", LowLimit);
-        Throttle("System.Void Creep::Rpc_PlayAggroIcon(System.Int32)", LowLimit);
-        Throttle("System.Void Creep::Rpc_OnCreepSpawn()", LowLimit);
-        Throttle("System.Void Creep::Rpc_PlayCreepHurtEffect()", MediumLimit); // Could be called often if the creep is attacked by lots of people
-        Throttle("System.Void Creep::Rpc_InitCreepDeathParams(System.Boolean)", LowLimit);
-        Throttle("System.Void Creep::Rpc_TintRender(UnityEngine.Color)", MediumLimit);
-        Throttle("System.Void Creep::Rpc_InitSkillChargeEffect(System.String,System.Single)", LowLimit);
-        Throttle("System.Void Creep::Rpc_InitSkillCastEffect(System.String)", LowLimit);
-        Throttle("System.Void Creep::Rpc_CrossFadeAnim(System.String,System.Single,System.Int32)", Unlimited);
-        Throttle("System.Void Creep::Rpc_CrossFadeAnim_Timed(System.String,System.Single,System.Int32,System.Single)", Unlimited);
-        Throttle("System.Void Creep::Rpc_InitUnspawnEffect(UnityEngine.Vector3,System.Single)", LowLimit);
+        Throttle("System.Void Creep::Rpc_PlayCreepJumpEffect()");
+        Throttle("System.Void Creep::Rpc_PlayAggroIcon(System.Int32)");
+        Throttle("System.Void Creep::Rpc_OnCreepSpawn()");
+        Throttle("System.Void Creep::Rpc_PlayCreepHurtEffect()"); // Could be called often if the creep is attacked by lots of people
+        Throttle("System.Void Creep::Rpc_InitCreepDeathParams(System.Boolean)");
+        Throttle("System.Void Creep::Rpc_TintRender(UnityEngine.Color)");
+        Throttle("System.Void Creep::Rpc_InitSkillChargeEffect(System.String,System.Single)");
+        Throttle("System.Void Creep::Rpc_InitSkillCastEffect(System.String)");
+        Throttle("System.Void Creep::Rpc_CrossFadeAnim(System.String,System.Single,System.Int32)");
+        Throttle("System.Void Creep::Rpc_CrossFadeAnim_Timed(System.String,System.Single,System.Int32,System.Single)");
+        Throttle("System.Void Creep::Rpc_InitUnspawnEffect(UnityEngine.Vector3,System.Single)");
 
         // CreepSpawner
-        Throttle("System.Void CreepSpawner::Rpc_InitSpecialSpawnEffect(UnityEngine.Vector3)", VeryLowLimit);
+        Throttle("System.Void CreepSpawner::Rpc_InitSpecialSpawnEffect(UnityEngine.Vector3)");
 
         // Net_ItemObject
-        Throttle("System.Void Net_ItemObject::Rpc_NetItemObjectPickup(Mirror.NetworkIdentity)", MediumLimit);
-        Throttle("System.Void Net_ItemObject::Rpc_SpawnPuffcloud()", MediumLimit);
+        Throttle("System.Void Net_ItemObject::Rpc_NetItemObjectPickup(Mirror.NetworkIdentity)");
+        Throttle("System.Void Net_ItemObject::Rpc_SpawnPuffcloud()");
 
         // NetNPC
-        Throttle("System.Void NetNPC::Rpc_CrossFade_Anim(System.String,System.Single,System.Int32)", Unlimited);
+        Throttle("System.Void NetNPC::Rpc_CrossFade_Anim(System.String,System.Single,System.Int32)");
 
         // Player
         Throttle("System.Void Player::Cmd_SetLatency(System.Int32)");
@@ -141,8 +141,8 @@ static class CmdRpcThrottle
         Throttle("System.Void PlayerInventory::Cmd_DropCurrency(System.Int32)");
         Throttle("System.Void PlayerInventory::Cmd_PurchaseBuybackItem(NetNPC,System.Int32,System.String)");
         Throttle("System.Void PlayerInventory::Cmd_SellItem(Mirror.NetworkIdentity,ItemData,System.Int32)");
-        Throttle("System.Void PlayerInventory::Cmd_InitBuyEffect()");
-        Throttle("System.Void PlayerInventory::Cmd_DropItem(ItemData,System.Int32)");
+        Throttle("System.Void PlayerInventory::Cmd_InitBuyEffect()", 4);
+        Throttle("System.Void PlayerInventory::Cmd_DropItem(ItemData,System.Int32)", 4);
         Throttle("System.Void PlayerInventory::Cmd_UseConsumable(ItemData)");
         Throttle("System.Void PlayerInventory::Rpc_PlayBuyEffect()");
         Throttle("System.Void PlayerInventory::Rpc_PlaySellEffect()");
@@ -180,10 +180,10 @@ static class CmdRpcThrottle
 
         // PlayerVisual
         Throttle("System.Void PlayerVisual::Cmd_SendNew_PlayerAppearanceStruct(PlayerAppearanceStruct)");
-        Throttle("System.Void PlayerVisual::Cmd_PlayTeleportEffect()", VeryLowLimit);
-        Throttle("System.Void PlayerVisual::Cmd_VanitySparkleEffect()", VeryLowLimit);
-        Throttle("System.Void PlayerVisual::Cmd_PoofSmokeEffect()", VeryLowLimit);
-        Throttle("System.Void PlayerVisual::Cmd_JumpAttackEffect()", VeryLowLimit);
+        Throttle("System.Void PlayerVisual::Cmd_PlayTeleportEffect()", 4);
+        Throttle("System.Void PlayerVisual::Cmd_VanitySparkleEffect()", 4);
+        Throttle("System.Void PlayerVisual::Cmd_PoofSmokeEffect()", 4);
+        Throttle("System.Void PlayerVisual::Cmd_JumpAttackEffect()", 8);
         Throttle("System.Void PlayerVisual::Cmd_CrossFadeAnim(System.String,System.Single,System.Int32)");
         Throttle("System.Void PlayerVisual::Cmd_ShowItemEmote(System.String)");
         Throttle("System.Void PlayerVisual::Cmd_ChangeClimbAnimationSpeed(System.Single)");
@@ -191,13 +191,13 @@ static class CmdRpcThrottle
         Throttle("System.Void PlayerVisual::Cmd_ToggleArmorRender(System.Int32,EquipCellTab)");
         Throttle("System.Void PlayerVisual::Cmd_HideWeapon(System.Single)");
         Throttle("System.Void PlayerVisual::Cmd_ResetSpinPlayerModel()");
-        Throttle("System.Void PlayerVisual::Rpc_PlayTeleportEffect()", VeryLowLimit);
-        Throttle("System.Void PlayerVisual::Rpc_VanitySparkleEffect()", VeryLowLimit);
-        Throttle("System.Void PlayerVisual::Rpc_PoofSmokeEffect()", VeryLowLimit);
-        Throttle("System.Void PlayerVisual::Rpc_JumpAttackEffect()", VeryLowLimit);
+        Throttle("System.Void PlayerVisual::Rpc_PlayTeleportEffect()", 4);
+        Throttle("System.Void PlayerVisual::Rpc_VanitySparkleEffect()", 4);
+        Throttle("System.Void PlayerVisual::Rpc_PoofSmokeEffect()", 4);
+        Throttle("System.Void PlayerVisual::Rpc_JumpAttackEffect()", 8);
         Throttle("System.Void PlayerVisual::Rpc_CrossFadeAnim(System.String,System.Single,System.Int32)");
         Throttle("System.Void PlayerVisual::IncludeRpc_Crossfade(System.String,System.Single,System.Int32)");
-        Throttle("System.Void PlayerVisual::Rpc_ShowItemEmote(System.String)", VeryLowLimit);
+        Throttle("System.Void PlayerVisual::Rpc_ShowItemEmote(System.String)");
         Throttle("System.Void PlayerVisual::Rpc_SetPlaybackSpeed(System.Single)");
         Throttle("System.Void PlayerVisual::Rpc_AltMovementBool(System.Boolean)");
         Throttle("System.Void PlayerVisual::Rpc_HideWeapon(System.Single)");
@@ -247,9 +247,9 @@ static class CmdRpcThrottle
 
     private static ushort Hash(string functionName) => (ushort)(functionName.GetStableHashCode() & 0xFFFF);
 
-    private static readonly ConcurrentDictionary<ushort, AbuseDetector> Detectors = [];
+    private static readonly ConcurrentDictionary<ushort, AbuseDetectorTokenBucket> Detectors = [];
 
-    private static AbuseDetector CreateDetector(ushort functionHash)
+    private static AbuseDetectorTokenBucket CreateDetector(ushort functionHash)
     {
         if (!CustomRateLimits.TryGetValue(functionHash, out var data))
         {
@@ -259,10 +259,10 @@ static class CmdRpcThrottle
                 Limit = UnspecifiedDefaultLimit,
                 MethodName = ""
             };
-            PerfectGuard.Logger.LogWarning($"Got an unconfigured RPC function ({GetMethodName(functionHash)})! Will throttle using default limit for unspecified methods.");
+            PerfectGuard.Logger.LogWarning($"Got an unconfigured CMD/RPC function ({GetMethodName(functionHash)})! Will throttle using default limit for unspecified methods.");
         }
 
-        return new AbuseDetector(data.Limit);
+        return new AbuseDetectorTokenBucket(data.Limit);
     }
 
     static bool CheckRateLimits(uint netId, ushort functionHash, byte componentIndex, bool isRpc)
@@ -290,16 +290,14 @@ static class CmdRpcThrottle
 
         var detector = Detectors.GetOrAdd(functionHash, CreateDetector);
 
-        var previousSuspicion = detector.Suspicion;
-        detector.TrackEvent(behaviour);
-        var nextSuspicion = detector.Suspicion;
+        var rateLimit = detector.TrackEvent(behaviour);
 
-        if (previousSuspicion == SuspicionLevel.Normal && nextSuspicion != SuspicionLevel.Normal)
+        if (rateLimit.IsRateLimited && DateTime.Now - rateLimit.PreviousRateLimitAt >= TimeSpan.FromSeconds(5))
         {
-            PerfectGuard.Logger.LogWarning($"RPC / CMD SPAM DETECTED! Blocking excessive calls to {GetMethodName(functionHash)} from sender: {behaviour.name}.");
+            PerfectGuard.Logger.LogWarning($"Network spam detected! ({behaviour.name}, {GetMethodName(functionHash)}, {detector.RateLimit}/s, {detector.BurstLimit} burst)");
         }
 
-        return nextSuspicion == SuspicionLevel.Normal;
+        return !rateLimit.IsRateLimited;
     }
 
     static string GetMethodName(ushort functionHash)
@@ -323,6 +321,7 @@ static class CmdRpcThrottle
         => CheckRateLimits(message.netId, message.functionHash, message.componentIndex, true);
 
     [HarmonyPatch(typeof(NetworkServer), nameof(NetworkServer.OnCommandMessage))]
-    static bool CmdThrottle(ref CommandMessage message)
-        => CheckRateLimits(message.netId, message.functionHash, message.componentIndex, false);
+    [HarmonyPrefix]
+    static bool CmdThrottle(ref CommandMessage msg)
+        => CheckRateLimits(msg.netId, msg.functionHash, msg.componentIndex, false);
 }
