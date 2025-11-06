@@ -28,10 +28,10 @@ internal static class PreventAudioSpam
 
     internal static bool CheckAudioCooldown(AudioSource instance)
     {
-        if (!PerfectGuard.EnablePerfectGuard.Value || !PerfectGuard.EnableAudioSpamProtection.Value || instance == null)
+        if (!PerfectGuard.AudioRateLimitingEnabled)
             return true;
 
-        if (!instance.gameObject.activeInHierarchy)
+        if (instance == null || !instance.gameObject.activeInHierarchy)
             return false;
 
         if (AudioCooldowns.TryGetValue(instance, out float cooldownEndTime) && Time.time < cooldownEndTime)

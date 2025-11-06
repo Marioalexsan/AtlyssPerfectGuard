@@ -259,7 +259,7 @@ static class CmdRpcThrottle
                 Limit = UnspecifiedDefaultLimit,
                 MethodName = ""
             };
-            PerfectGuard.Logger.LogWarning($"Got an unconfigured CMD/RPC function ({GetMethodName(functionHash)})! Will throttle using default limit for unspecified methods.");
+            Logging.LogDebug($"Got an unconfigured CMD/RPC function ({GetMethodName(functionHash)})! Will throttle using default limit for unspecified methods.", PerfectGuard.DetailedLogging);
         }
 
         return new AbuseDetectorTokenBucket(data.Limit);
@@ -267,7 +267,7 @@ static class CmdRpcThrottle
 
     static bool CheckRateLimits(uint netId, ushort functionHash, byte componentIndex, bool isRpc)
     {
-        if (!PerfectGuard.EnablePerfectGuard.Value || !PerfectGuard.EnableMessageRateLimiting.Value)
+        if (!PerfectGuard.NetworkRateLimitingEnabled)
             return true;
 
         NetworkIdentity identity;
@@ -294,7 +294,7 @@ static class CmdRpcThrottle
 
         if (rateLimit.IsRateLimited && DateTime.Now - rateLimit.PreviousRateLimitAt >= TimeSpan.FromSeconds(5))
         {
-            PerfectGuard.Logger.LogWarning($"Network spam detected! ({behaviour.name}, {GetMethodName(functionHash)}, {detector.RateLimit}/s, {detector.BurstLimit} burst)");
+            Logging.LogWarning($"Network spam detected! ({behaviour.name}, {GetMethodName(functionHash)}, {detector.RateLimit}/s, {detector.BurstLimit} burst)", PerfectGuard.DetailedLogging);
         }
 
         return !rateLimit.IsRateLimited;

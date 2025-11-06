@@ -42,7 +42,7 @@ internal class AbuseDetectorTokenBucket
 
         // Sanity check
         if (burstLimit <= rateLimit)
-            PerfectGuard.Logger.LogWarning("A token bucket configuration is incorrect!");
+            Logging.LogWarning("A token bucket configuration is incorrect!");
 
         AllDetectors.Add(this);
     }

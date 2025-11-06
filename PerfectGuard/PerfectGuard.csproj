@@ -42,12 +42,9 @@
         <Reference Include="$(AtlyssManaged)Assembly-CSharp.dll" Publicize="true" Private="False" />
         <Reference Include="$(AtlyssManaged)UnityEngine.UI.dll" Private="False" />
         <Reference Include="$(AtlyssManaged)Newtonsoft.Json.dll" Private="False" />
-        <Reference Include="$(AtlyssManaged)Mirror.dll" Private="False" Publicize="true"/>
+        <Reference Include="$(AtlyssManaged)Mirror.dll" Private="False" Publicize="true" />
         <Reference Include="$(AtlyssManaged)com.rlabrecque.steamworks.net.dll" Private="False" />
 
-        <!-- Reference mod packages from Thunderstore like this (works as if it's a NuGet package): -->
-        <!--
-        <PackageReference Include="Nessie-EasySettings" Version="1.1.3" Private="False" />
-        -->
+        <PackageReference Include="Nessie-EasySettings" Version="1.2.0" Private="False" />
     </ItemGroup>
 </Project>
